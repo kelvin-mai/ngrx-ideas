@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppState } from './store';
+import { SetInitialUser } from './store/actions/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'ng-ideas';
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new SetInitialUser());
+  }
 }

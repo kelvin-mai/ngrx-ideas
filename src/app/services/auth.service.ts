@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { environment } from '@env/environment';
 import { AuthDTO, AuthType } from '@app/models/auth';
 import { User } from '@app/models/user';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   auth(authType: AuthType, data: AuthDTO): Observable<User> {
-    return this.http.post<User>(`${this.api}/${authType}`, data);
+    console.log('auth type', authType);
+    return this.http.post<User>(`${this.api}/${authType}`, data).pipe(
+      mergeMap((user: User) => {
+        this.token = user.token;
+        return of(user);
+      })
+    );
   }
 
   whoami(): Observable<User> {
