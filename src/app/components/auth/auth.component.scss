@@ -1,11 +1,16 @@
 .AuthCard {
   width: 60%;
   margin: auto;
-  margin-top: 10rem;
+  // margin-top: 10rem;
 
-  &-button {
-    display: block;
-    margin: auto;
+  &-buttons {
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 0 1rem;
+      margin: 0 1rem;
+    }
   }
 
   &-form {
@@ -15,11 +20,6 @@
 
     .ui-inputgroup {
       margin: 1rem;
-    }
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-around;
     }
   }
 }
