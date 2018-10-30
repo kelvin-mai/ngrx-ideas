@@ -1,11 +1,11 @@
 import { ErrorActionTypes, Action } from '../actions/error.action';
 
 export interface ErrorState {
-  message: string | null;
+  error: any;
 }
 
 const initialState: ErrorState = {
-  message: null
+  error: null
 };
 
 export const errorReducer: (state: ErrorState, action: Action) => ErrorState = (
@@ -14,9 +14,9 @@ export const errorReducer: (state: ErrorState, action: Action) => ErrorState = (
 ) => {
   switch (action.type) {
     case ErrorActionTypes.ADD_ERROR:
-      return { ...state, message: action.payload };
+      return { ...state, error: action.payload };
     case ErrorActionTypes.REMOVE_ERROR:
-      return { ...state, message: null };
+      return { ...state, error: null };
     default:
       return state;
   }
