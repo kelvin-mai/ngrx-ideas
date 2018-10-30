@@ -1,0 +1,25 @@
+.AuthCard {
+  width: 60%;
+  margin: auto;
+  margin-top: 10rem;
+
+  &-button {
+    display: block;
+    margin: auto;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .ui-inputgroup {
+      margin: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+}

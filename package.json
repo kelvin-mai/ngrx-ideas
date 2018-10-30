@@ -24,6 +24,7 @@
     "@ngrx/store": "^6.1.0",
     "@ngrx/store-devtools": "^6.1.0",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
     "primeicons": "^1.0.0",
     "primeng": "^6.1.5",
     "rxjs": "~6.3.3",
