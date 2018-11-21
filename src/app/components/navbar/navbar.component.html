@@ -1,0 +1,8 @@
+<p-menubar [model]="items">
+  <button 
+    pButton 
+    icon="fa fa-sign-out"
+    [label]="authService.token ? 'Login' : 'Logout'"
+    routerLink="/auth"
+  ></button>
+</p-menubar>

@@ -11,9 +11,10 @@ import { AuthService } from '@app/services/auth.service';
 import { ApiService } from '@app/services/api.service';
 import { AppComponent } from '@app/app.component';
 import { AuthComponent } from '@app/components/auth/auth.component';
+import { NavbarComponent } from '@app/components/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent, AuthComponent, NavbarComponent],
   imports: [
     AppRoutingModule,
     AppStoreModule,

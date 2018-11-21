@@ -20,10 +20,14 @@ export class CustomSerializer
       state = state.firstChild;
     }
     const { params } = state;
+    const {
+      url,
+      root: { queryParams }
+    } = routerState;
 
     return {
-      url: routerState.url,
-      queryParams: routerState.root.queryParams,
+      url,
+      queryParams,
       params
     };
   }
