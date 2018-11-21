@@ -14,6 +14,10 @@ export class NavbarComponent {
       label: 'Home',
       routerLink: ['/'],
       icon: 'fa fa-home'
+    },
+    {
+      label: 'Ideas',
+      routerLink: ['/ideas']
     }
   ];
 

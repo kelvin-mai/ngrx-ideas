@@ -1,6 +1,6 @@
 <div class="AuthCard">
   <p-card>
-    <form [formGroup]="authForm" (ngSubmit)="login()">
+    <form *ngIf="!loading" [formGroup]="authForm" (ngSubmit)="auth('login')">
       <div class="AuthCard-form">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
@@ -14,9 +14,13 @@
       </div>
 
       <div class="AuthCard-buttons">
-        <button class="ui-button-info" type="button" pButton label="Register" [disabled]="authForm.invalid" (click)="register()"></button>
+        <button class="ui-button-info" type="button" pButton label="Register" [disabled]="authForm.invalid" (click)="auth('register')"></button>
         <button type="submit" pButton label="Login" [disabled]="authForm.invalid"></button>
       </div>
     </form>
+
+    <div class="AuthCard-loader">
+      <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+    </div>
   </p-card>
 </div>

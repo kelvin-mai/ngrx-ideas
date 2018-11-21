@@ -26,6 +26,7 @@ export class AuthEffects {
       this.authService.whoami().pipe(
         map((user: User) => new fromAuth.SetCurrentUser(user)),
         catchError(err => {
+          this.store.dispatch(new fromAuth.SetCurrentUser(null));
           this.authService.token = null;
           return of(new fromError.AddError(err.error));
         })
@@ -41,6 +42,7 @@ export class AuthEffects {
       this.authService.auth('login', action.payload).pipe(
         map((user: User) => new fromAuth.SetCurrentUser(user)),
         catchError(err => {
+          this.store.dispatch(new fromAuth.SetCurrentUser(null));
           this.authService.token = null;
           return of(new fromError.AddError(err.error));
         })
@@ -56,6 +58,7 @@ export class AuthEffects {
       this.authService.auth('register', action.payload).pipe(
         map((user: User) => new fromAuth.SetCurrentUser(user)),
         catchError(err => {
+          this.store.dispatch(new fromAuth.SetCurrentUser(null));
           this.authService.token = null;
           return of(new fromError.AddError(err.error));
         })
