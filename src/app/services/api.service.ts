@@ -7,9 +7,7 @@ import { AuthService } from '@app/services/auth.service';
 import { User } from '@app/models/user';
 import { Idea, IdeaDTO } from '@app/models/idea';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
   private api: string = environment.api_server + '/api';
 

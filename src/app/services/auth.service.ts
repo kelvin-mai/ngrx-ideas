@@ -7,9 +7,7 @@ import { AuthDTO, AuthType } from '@app/models/auth';
 import { User } from '@app/models/user';
 import { mergeMap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private api: string = environment.api_server + '/auth';
 
