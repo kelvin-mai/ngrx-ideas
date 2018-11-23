@@ -1,0 +1,5 @@
+<p-card *ngFor="let user of users | async">
+  <h2>{{ user.username }}</h2>
+  <p>Registered: {{ user.created | date}}</p>
+  <a>Bookmarks: ({{ user.bookmarks.length || 0 }})</a>
+</p-card>

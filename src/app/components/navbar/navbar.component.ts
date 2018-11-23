@@ -18,6 +18,10 @@ export class NavbarComponent {
     {
       label: 'Ideas',
       routerLink: ['/ideas']
+    },
+    {
+      label: 'Users',
+      routerLink: ['/users']
     }
   ];
 

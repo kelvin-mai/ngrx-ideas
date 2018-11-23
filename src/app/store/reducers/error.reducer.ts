@@ -1,4 +1,4 @@
-import { ErrorActionTypes, Action } from '../actions/error.action';
+import { ErrorActions, Action } from '../actions/error.action';
 
 export interface ErrorState {
   error: any;
@@ -13,9 +13,9 @@ export const errorReducer: (state: ErrorState, action: Action) => ErrorState = (
   action: Action
 ) => {
   switch (action.type) {
-    case ErrorActionTypes.ADD_ERROR:
+    case ErrorActions.ADD_ERROR:
       return { ...state, error: action.payload };
-    case ErrorActionTypes.REMOVE_ERROR:
+    case ErrorActions.REMOVE_ERROR:
       return { ...state, error: null };
     default:
       return state;
