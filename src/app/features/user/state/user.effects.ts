@@ -4,14 +4,10 @@ import { Store, Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, mergeMap, map } from 'rxjs/operators';
 
-import { AppState } from '@app/features/user/state';
-import {
-  UserActions,
-  LoadUsers,
-  LoadUsersSuccess
-} from '@app/features/user/state/user.action';
-import { RemoveError, AddError } from '@app/store/actions/error.action';
 import { ApiService } from '@app/services/api.service';
+import { AppState } from '@app/features/user/state';
+import * as fromUser from '@app/features/user/state/user.action';
+import * as fromError from '@app/store/actions/error.action';
 
 @Injectable()
 export class UserEffects {
@@ -23,12 +19,13 @@ export class UserEffects {
 
   @Effect()
   loadUsers$: Observable<Action> = this.action$.pipe(
-    ofType<LoadUsers>(UserActions.LOAD_USERS),
-    tap(() => this.store.dispatch(new RemoveError())),
-    mergeMap(action =>
-      this.api.getUsers().pipe(
-        map(users => new LoadUsersSuccess(users)),
-        catchError(err => of(new AddError(err.error)))
+    ofType<fromUser.LoadUsers>(fromUser.UserActions.LOAD_USERS),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(() => this.store.select(state => state.users.page)),
+    mergeMap(page =>
+      this.api.getUsers(page.toString()).pipe(
+        map(users => new fromUser.LoadUsersSuccess(users)),
+        catchError(err => of(new fromError.AddError(err.error)))
       )
     )
   );

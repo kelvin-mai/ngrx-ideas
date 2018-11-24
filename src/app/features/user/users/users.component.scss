@@ -5,3 +5,17 @@ p-card {
 h2 {
   margin-top: 0;
 }
+
+.UserCard {
+  &-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &-links {
+    a {
+      margin-right: 2rem;
+    }
+  }
+}
