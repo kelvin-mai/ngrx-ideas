@@ -8,8 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { ideaReducer } from './state/idea.reducer';
 import { IdeaEffects } from './state/idea.effects';
 import { IdeasComponent } from './ideas/ideas.component';
+import { IdeaComponent } from './ideas/idea/idea.component';
 
-const routes: Routes = [{ path: '', component: IdeasComponent }];
+const routes: Routes = [
+  { path: '', component: IdeasComponent },
+  { path: '**', redirectTo: '' }
+];
 
 @NgModule({
   imports: [
@@ -19,6 +23,6 @@ const routes: Routes = [{ path: '', component: IdeasComponent }];
     StoreModule.forFeature('ideas', ideaReducer),
     EffectsModule.forFeature([IdeaEffects])
   ],
-  declarations: [IdeasComponent]
+  declarations: [IdeasComponent, IdeaComponent]
 })
 export class IdeaModule {}

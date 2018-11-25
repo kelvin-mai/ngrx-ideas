@@ -9,7 +9,10 @@ import { UsersComponent } from './users/users.component';
 import { UserEffects } from './state/user.effects';
 import { userReducer } from './state/user.reducer';
 
-const routes: Routes = [{ path: '', component: UsersComponent }];
+const routes: Routes = [
+  { path: '', component: UsersComponent },
+  { path: '**', redirectTo: '' }
+];
 
 @NgModule({
   imports: [
