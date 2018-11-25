@@ -5,17 +5,20 @@ import { StoreModule } from '@ngrx/store';
 
 import { UIModule } from '@app/ui.module';
 import { EffectsModule } from '@ngrx/effects';
+import { ideaReducer } from './state/idea.reducer';
+import { IdeaEffects } from './state/idea.effects';
+import { IdeasComponent } from './ideas/ideas.component';
 
-const routes: Routes = [];
+const routes: Routes = [{ path: '', component: IdeasComponent }];
 
 @NgModule({
   imports: [
     CommonModule,
     UIModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('ideas', {}),
-    EffectsModule.forFeature([])
+    StoreModule.forFeature('ideas', ideaReducer),
+    EffectsModule.forFeature([IdeaEffects])
   ],
-  declarations: []
+  declarations: [IdeasComponent]
 })
 export class IdeaModule {}
