@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { Idea } from '@app/models/idea';
 import { AppState, LoadIdeas } from '@app/features/idea/state';
-import { Entity } from '@app/models/entity';
-import { map } from 'rxjs/operators';
+import { selectAllIdeas } from '../state/idea.selector';
 
 @Component({
   selector: 'app-ideas',
@@ -19,12 +18,6 @@ export class IdeasComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadIdeas());
-    this.ideas = this.store
-      .select(state => state.ideas.ideas)
-      .pipe(this.toArray());
-  }
-
-  private toArray() {
-    return map(ideas => Object.keys(ideas).map(id => ideas[id]));
+    this.ideas = this.store.select(selectAllIdeas);
   }
 }
