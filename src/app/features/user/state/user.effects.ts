@@ -21,9 +21,8 @@ export class UserEffects {
   loadUsers$: Observable<Action> = this.action$.pipe(
     ofType<fromUser.LoadUsers>(fromUser.UserActions.LOAD_USERS),
     tap(() => this.store.dispatch(new fromError.RemoveError())),
-    mergeMap(() => this.store.select(state => state.users.page)),
-    mergeMap(page =>
-      this.api.getUsers(page.toString()).pipe(
+    mergeMap(() =>
+      this.api.getUsers().pipe(
         map(users => new fromUser.LoadUsersSuccess(users)),
         catchError(err => of(new fromError.AddError(err.error)))
       )

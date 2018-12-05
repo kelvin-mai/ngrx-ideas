@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 import { AuthService } from '@app/services/auth.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import { SetCurrentUser } from '@app/store/actions/auth.action';
 
 @Component({
   selector: 'app-navbar',
@@ -25,5 +29,17 @@ export class NavbarComponent {
     }
   ];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
+
+  onClick() {
+    if (this.authService.token) {
+      this.authService.token = null;
+      this.store.dispatch(new SetCurrentUser(null));
+    }
+    this.router.navigate(['/auth']);
+  }
 }
