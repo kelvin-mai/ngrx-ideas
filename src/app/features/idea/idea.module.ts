@@ -2,16 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { UIModule } from '@app/ui.module';
-import { EffectsModule } from '@ngrx/effects';
+import { UUIDGuard } from '@app/services/uuid.guard';
 import { ideaReducer } from './state/idea.reducer';
 import { IdeaEffects } from './state/idea.effects';
+import { IdeaResolver } from './idea.resolver';
 import { IdeasComponent } from './ideas/ideas.component';
 import { IdeaComponent } from './ideas/idea/idea.component';
+import { SelectedIdeaComponent } from './selected-idea/selected-idea.component';
 
 const routes: Routes = [
   { path: '', component: IdeasComponent },
+  {
+    path: ':id',
+    component: SelectedIdeaComponent,
+    canActivate: [UUIDGuard],
+    resolve: { data: IdeaResolver }
+  },
   { path: '**', redirectTo: '' }
 ];
 
@@ -23,6 +32,7 @@ const routes: Routes = [
     StoreModule.forFeature('ideas', ideaReducer),
     EffectsModule.forFeature([IdeaEffects])
   ],
-  declarations: [IdeasComponent, IdeaComponent]
+  declarations: [IdeasComponent, IdeaComponent, SelectedIdeaComponent],
+  providers: [IdeaResolver]
 })
 export class IdeaModule {}

@@ -5,13 +5,19 @@
       {{ idea.upvotes.length - idea.upvotes.length || 0 }}
       <a><i class="fa fa-angle-down"></i></a>
     </div>
-  
-    <h2 class="Idea-header">{{ idea.idea }}</h2>
+
+    <h2 class="Idea-header" [routerLink]="['/ideas', idea.id]">
+      {{ idea.idea }}
+    </h2>
   </div>
   <p class="Idea-description">{{ idea.description }}</p>
 
   <div class="Idea-footer">
-    <p>Created by <a>{{ idea.author.username }}</a> on {{ idea.created | date }}</p>
-    <p><a>comments: ({{ idea.comments.length || 0 }})</a></p>
+    <p>
+      Created by <a>{{ idea.author.username }}</a> on {{ idea.created | date }}
+    </p>
+    <p>
+      <a>comments: ({{ idea.comments.length || 0 }})</a>
+    </p>
   </div>
 </p-card>

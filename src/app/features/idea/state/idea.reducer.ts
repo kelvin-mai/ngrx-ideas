@@ -14,14 +14,22 @@ export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
 ) => {
   switch (action.type) {
     case IdeaActions.LOAD_IDEAS:
-      const { page } = state;
-      return { ...state, page: page + 1, loading: true, loaded: false };
+      return { ...state, loading: true, loaded: false };
+    case IdeaActions.LOAD_IDEA:
+      return { ...state, loading: true, loaded: false };
     case IdeaActions.LOAD_IDEAS_SUCCESS:
       const ideas = action.payload.reduce(
         (acc, idea) => ({ ...acc, [idea.id]: idea }),
         state.ideas
       );
       return { ...state, ideas, loading: false, loaded: true };
+    case IdeaActions.LOAD_IDEA_SUCCESS:
+      return {
+        ...state,
+        selectedIdea: action.payloaod,
+        loading: false,
+        loaded: true
+      };
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { tap, mergeMap, catchError, map } from 'rxjs/operators';
+import { tap, mergeMap, catchError, map, withLatestFrom } from 'rxjs/operators';
 
 import { ApiService } from '@app/services/api.service';
 import * as fromError from '@app/store/actions/error.action';
@@ -27,5 +27,24 @@ export class IdeaEffects {
         catchError(err => of(new fromError.AddError(err)))
       )
     )
+  );
+
+  @Effect()
+  loadIdea$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.LoadIdea>(fromIdea.IdeaActions.LOAD_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    withLatestFrom(this.store),
+    mergeMap(([action, state]: [fromIdea.LoadIdea, AppState]) => {
+      console.log(action, state);
+      const idea = state.ideas.ideas[action.payload];
+      if (idea) {
+        return of(new fromIdea.LoadIdeaSuccess(idea));
+      } else {
+        return this.api.getIdea(action.payload).pipe(
+          mergeMap(res => of(new fromIdea.LoadIdeaSuccess(res))),
+          catchError(err => of(new fromError.AddError(err)))
+        );
+      }
+    })
   );
 }

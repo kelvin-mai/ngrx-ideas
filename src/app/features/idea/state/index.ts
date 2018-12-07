@@ -7,6 +7,7 @@ export interface IdeaState {
   page: number;
   loading: boolean;
   loaded: boolean;
+  selectedIdea?: Idea;
 }
 
 export interface AppState extends Store.AppState {

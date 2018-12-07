@@ -9,6 +9,7 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { AppStoreModule } from '@app/store/app-store.module';
 import { AuthService } from '@app/services/auth.service';
 import { ApiService } from '@app/services/api.service';
+import { UUIDGuard } from '@app/services/uuid.guard';
 import { AppComponent } from '@app/app.component';
 import { AuthComponent } from '@app/components/auth/auth.component';
 import { NavbarComponent } from '@app/components/navbar/navbar.component';
@@ -24,7 +25,7 @@ import { NavbarComponent } from '@app/components/navbar/navbar.component';
     ReactiveFormsModule,
     UIModule
   ],
-  providers: [AuthService, ApiService],
+  providers: [AuthService, ApiService, UUIDGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
