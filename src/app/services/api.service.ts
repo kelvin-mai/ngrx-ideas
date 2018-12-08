@@ -48,8 +48,8 @@ export class ApiService {
     return this.request('GET', `ideas/${id}`);
   }
 
-  createIdea(id: string, data: IdeaDTO): Observable<Idea> {
-    return this.request('POST', `ideas/${id}`, data);
+  createIdea(data: IdeaDTO): Observable<Idea> {
+    return this.request('POST', `ideas/`, data);
   }
 
   updateIdea(id: string, data: Partial<IdeaDTO>): Observable<Idea> {

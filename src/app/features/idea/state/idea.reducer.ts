@@ -5,7 +5,8 @@ const initialState: IdeaState = {
   ideas: {},
   page: 0,
   loading: false,
-  loaded: false
+  loaded: false,
+  selectedIdea: null
 };
 
 export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
@@ -16,17 +17,57 @@ export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
     case IdeaActions.LOAD_IDEAS:
       return { ...state, loading: true, loaded: false };
     case IdeaActions.LOAD_IDEA:
+      return {
+        ...state,
+        selectedIdea: action.payload,
+        loading: true,
+        loaded: false
+      };
+    case IdeaActions.CREATE_IDEA:
+      return { ...state, loading: true, loaded: false };
+    case IdeaActions.UPDATE_IDEA:
+      return { ...state, loading: true, loaded: false };
+    case IdeaActions.DELETE_IDEA:
       return { ...state, loading: true, loaded: false };
     case IdeaActions.LOAD_IDEAS_SUCCESS:
-      const ideas = action.payload.reduce(
-        (acc, idea) => ({ ...acc, [idea.id]: idea }),
-        state.ideas
-      );
-      return { ...state, ideas, loading: false, loaded: true };
+      return {
+        ...state,
+        ideas: action.payload.reduce(
+          (acc, idea) => ({ ...acc, [idea.id]: idea }),
+          state.ideas
+        ),
+        loading: false,
+        loaded: true
+      };
     case IdeaActions.LOAD_IDEA_SUCCESS:
       return {
         ...state,
-        selectedIdea: action.payloaod,
+        ideas: action.payload
+          ? { ...state.ideas, [action.payload.id]: action.payload }
+          : state.ideas,
+        loading: false,
+        loaded: true
+      };
+    case IdeaActions.CREATE_IDEA_SUCCESS:
+      return {
+        ...state,
+        ideas: { ...state.ideas, [action.payload.id]: action.payload },
+        loading: false,
+        loaded: true
+      };
+    case IdeaActions.UPDATE_IDEA_SUCCESS:
+      return {
+        ...state,
+        ideas: { ...state.ideas, [action.payload.id]: action.payload },
+        loading: false,
+        loaded: true
+      };
+    case IdeaActions.DELETE_IDEA_SUCCESS:
+      return {
+        ...state,
+        ideas: Object.keys(state.ideas)
+          .filter(key => key !== action.payload)
+          .reduce((acc, key) => ({ ...acc, key: state[key] }), {}),
         loading: false,
         loaded: true
       };

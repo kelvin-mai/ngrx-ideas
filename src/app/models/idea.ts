@@ -12,6 +12,7 @@ export interface Idea {
 }
 
 export interface IdeaDTO {
+  id?: string;
   idea: string;
   description: string;
 }

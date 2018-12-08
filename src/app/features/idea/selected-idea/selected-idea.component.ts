@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppState } from '../state';
+import { selectCurrentIdea } from '../state/idea.selector';
 
 @Component({
   selector: 'app-selected-idea',
@@ -13,10 +14,8 @@ export class SelectedIdeaComponent implements OnInit {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
-    // this.store
-    //   .select(state => state.ideas.selectedIdea)
-    //   .subscribe(val => {
-    //     console.log(val);
-    //   });
+    this.store.select(selectCurrentIdea).subscribe(val => {
+      console.log(val);
+    });
   }
 }

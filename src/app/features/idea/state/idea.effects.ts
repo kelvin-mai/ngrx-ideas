@@ -38,7 +38,7 @@ export class IdeaEffects {
       console.log(action, state);
       const idea = state.ideas.ideas[action.payload];
       if (idea) {
-        return of(new fromIdea.LoadIdeaSuccess(idea));
+        return of(new fromIdea.LoadIdeaSuccess());
       } else {
         return this.api.getIdea(action.payload).pipe(
           mergeMap(res => of(new fromIdea.LoadIdeaSuccess(res))),
@@ -46,5 +46,41 @@ export class IdeaEffects {
         );
       }
     })
+  );
+
+  @Effect()
+  createIdeas$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.CreateIdea>(fromIdea.IdeaActions.CREATE_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(action =>
+      this.api.createIdea(action.payload).pipe(
+        map(idea => new fromIdea.CreateIdeaSuccess(idea)),
+        catchError(err => of(new fromError.AddError(err)))
+      )
+    )
+  );
+
+  @Effect()
+  updateIdeas$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.UpdateIdea>(fromIdea.IdeaActions.UPDATE_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(action =>
+      this.api.updateIdea(action.payload.id, action.payload).pipe(
+        map(idea => new fromIdea.UpdateIdeaSuccess(idea)),
+        catchError(err => of(new fromError.AddError(err)))
+      )
+    )
+  );
+
+  @Effect()
+  deleteIdeas$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.DeleteIdea>(fromIdea.IdeaActions.DELETE_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(action =>
+      this.api.deleteIdea(action.payload).pipe(
+        map(idea => new fromIdea.DeleteIdeaSuccess(idea.id)),
+        catchError(err => of(new fromError.AddError(err)))
+      )
+    )
   );
 }
