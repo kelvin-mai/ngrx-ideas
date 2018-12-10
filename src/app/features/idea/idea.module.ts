@@ -10,7 +10,6 @@ import { ideaReducer } from './state/idea.reducer';
 import { IdeaEffects } from './state/idea.effects';
 import { IdeaResolver } from './idea.resolver';
 import { IdeasComponent } from './ideas/ideas.component';
-import { IdeaComponent } from './ideas/idea/idea.component';
 import { SelectedIdeaComponent } from './selected-idea/selected-idea.component';
 
 const routes: Routes = [
@@ -32,7 +31,7 @@ const routes: Routes = [
     StoreModule.forFeature('ideas', ideaReducer),
     EffectsModule.forFeature([IdeaEffects])
   ],
-  declarations: [IdeasComponent, IdeaComponent, SelectedIdeaComponent],
+  declarations: [IdeasComponent, SelectedIdeaComponent],
   providers: [IdeaResolver]
 })
 export class IdeaModule {}

@@ -35,7 +35,6 @@ export class IdeaEffects {
     tap(() => this.store.dispatch(new fromError.RemoveError())),
     withLatestFrom(this.store),
     mergeMap(([action, state]: [fromIdea.LoadIdea, AppState]) => {
-      console.log(action, state);
       const idea = state.ideas.ideas[action.payload];
       if (idea) {
         return of(new fromIdea.LoadIdeaSuccess());

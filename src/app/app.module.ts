@@ -13,9 +13,10 @@ import { UUIDGuard } from '@app/services/uuid.guard';
 import { AppComponent } from '@app/app.component';
 import { AuthComponent } from '@app/components/auth/auth.component';
 import { NavbarComponent } from '@app/components/navbar/navbar.component';
+import { IdeaComponent } from '@app/components/idea/idea.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, NavbarComponent],
+  declarations: [AppComponent, AuthComponent, NavbarComponent, IdeaComponent],
   imports: [
     AppRoutingModule,
     AppStoreModule,

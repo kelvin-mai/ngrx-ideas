@@ -17,7 +17,9 @@
       Created by <a>{{ idea.author.username }}</a> on {{ idea.created | date }}
     </p>
     <p>
-      <a>comments: ({{ idea.comments.length || 0 }})</a>
+      <a [routerLink]="['/ideas', idea.id]"
+        >comments: ({{ idea.comments.length || 0 }})</a
+      >
     </p>
   </div>
 </p-card>
