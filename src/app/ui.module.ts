@@ -9,7 +9,10 @@ import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 
+import { IdeaComponent } from '@app/components/idea/idea.component';
+
 @NgModule({
+  declarations: [IdeaComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -22,6 +25,7 @@ import { ToastModule } from 'primeng/toast';
   exports: [
     ButtonModule,
     CardModule,
+    IdeaComponent,
     InputTextModule,
     MenubarModule,
     ProgressSpinnerModule,
