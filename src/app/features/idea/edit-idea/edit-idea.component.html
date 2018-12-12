@@ -1,0 +1,10 @@
+<h2>Edit Idea</h2>
+
+<div *ngIf="idea">
+  <app-idea [idea]="idea"></app-idea>
+
+  <app-idea-editable
+    [idea]="idea"
+    (onSubmit)="submit($event)"
+  ></app-idea-editable>
+</div>

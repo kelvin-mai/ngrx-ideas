@@ -1,0 +1,24 @@
+p-card {
+  margin: 1rem;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  align-items: stretch;
+  padding-bottom: 2rem;
+
+  &-input {
+    h4 {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+    input,
+    textarea {
+      width: 100%;
+    }
+  }
+}
