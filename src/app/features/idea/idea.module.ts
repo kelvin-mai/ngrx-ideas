@@ -17,7 +17,6 @@ import { NewIdeaComponent } from './new-idea/new-idea.component';
 import { EditIdeaComponent } from './edit-idea/edit-idea.component';
 
 const routes: Routes = [
-  { path: '', component: IdeasComponent },
   {
     path: 'new',
     component: NewIdeaComponent,
@@ -35,6 +34,7 @@ const routes: Routes = [
     canActivate: [UUIDGuard, AuthService],
     resolve: { data: IdeaResolver }
   },
+  { path: '', component: IdeasComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -8,13 +8,15 @@ import { ApiService } from '@app/services/api.service';
 import * as fromError from '@app/store/actions/error.action';
 import * as fromIdea from './idea.action';
 import { AppState } from '.';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class IdeaEffects {
   constructor(
     private store: Store<AppState>,
     private action$: Actions,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) {}
 
   @Effect()
@@ -81,5 +83,21 @@ export class IdeaEffects {
         catchError(err => of(new fromError.AddError(err)))
       )
     )
+  );
+
+  @Effect({ dispatch: false })
+  createIdeaRedirect$ = this.action$.pipe(
+    ofType<fromIdea.CreateIdeaSuccess>(
+      fromIdea.IdeaActions.CREATE_IDEA_SUCCESS
+    ),
+    tap(action => this.router.navigate(['/ideas', action.payload.id]))
+  );
+
+  @Effect({ dispatch: false })
+  updateIdeaRedirect$ = this.action$.pipe(
+    ofType<fromIdea.UpdateIdeaSuccess>(
+      fromIdea.IdeaActions.UPDATE_IDEA_SUCCESS
+    ),
+    tap(action => this.router.navigate(['/ideas', action.payload.id]))
   );
 }

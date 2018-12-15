@@ -12,12 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-idea.component.scss']
 })
 export class NewIdeaComponent implements OnInit {
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {}
 
   submit(e: IdeaDTO) {
     this.store.dispatch(new CreateIdea(e));
-    this.router.navigate(['/ideas']);
   }
 }

@@ -37,6 +37,5 @@ export class EditIdeaComponent implements OnInit {
 
   submit(e: IdeaDTO) {
     this.store.dispatch(new UpdateIdea(e));
-    this.router.navigate(['/ideas', this.idea.id]);
   }
 }
