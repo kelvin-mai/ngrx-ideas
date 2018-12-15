@@ -4,7 +4,12 @@ import { Store } from '@ngrx/store';
 
 import { Idea } from '@app/models/idea';
 import { User } from '@app/models/user';
-import { AppState, LoadIdeas } from '@app/features/idea/state';
+import {
+  AppState,
+  LoadIdeas,
+  UpvoteIdea,
+  DownvoteIdea
+} from '@app/features/idea/state';
 import { selectAllIdeas, selectIdeaLoader } from '../state/idea.selector';
 
 @Component({
@@ -31,5 +36,12 @@ export class IdeasComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.auth$.unsubscribe();
+  }
+
+  upvote(id: string) {
+    this.store.dispatch(new UpvoteIdea(id));
+  }
+  downvote(id: string) {
+    this.store.dispatch(new DownvoteIdea(id));
   }
 }

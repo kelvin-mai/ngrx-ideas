@@ -14,5 +14,7 @@
     *ngFor="let idea of (ideas | async)"
     [idea]="idea"
     [displayOptions]="idea.author.id === currentUser?.id"
+    (onUpvote)="upvote(idea.id)"
+    (onDownvote)="downvote(idea.id)"
   ></app-idea>
 </div>

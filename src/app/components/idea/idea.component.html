@@ -3,7 +3,7 @@
     <div class="Idea-header">
       <div class="Idea-votes">
         <a (click)="onUpvote.emit()"><i class="fa fa-angle-up"></i></a>
-        {{ idea?.upvotes?.length - idea?.upvotes?.length || 0 }}
+        {{ idea.upvotes - idea.downvotes }}
         <a (click)="onDownvote.emit()"><i class="fa fa-angle-down"></i></a>
       </div>
 

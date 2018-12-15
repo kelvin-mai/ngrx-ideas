@@ -26,7 +26,7 @@ export class IdeaEffects {
     mergeMap(action =>
       this.api.getIdeas().pipe(
         map(ideas => new fromIdea.LoadIdeasSuccess(ideas)),
-        catchError(err => of(new fromError.AddError(err)))
+        catchError(err => of(new fromError.AddError(err.error)))
       )
     )
   );
@@ -43,7 +43,7 @@ export class IdeaEffects {
       } else {
         return this.api.getIdea(action.payload).pipe(
           mergeMap(res => of(new fromIdea.LoadIdeaSuccess(res))),
-          catchError(err => of(new fromError.AddError(err)))
+          catchError(err => of(new fromError.AddError(err.error)))
         );
       }
     })
@@ -56,7 +56,7 @@ export class IdeaEffects {
     mergeMap(action =>
       this.api.createIdea(action.payload).pipe(
         map(idea => new fromIdea.CreateIdeaSuccess(idea)),
-        catchError(err => of(new fromError.AddError(err)))
+        catchError(err => of(new fromError.AddError(err.error)))
       )
     )
   );
@@ -68,7 +68,7 @@ export class IdeaEffects {
     mergeMap(action =>
       this.api.updateIdea(action.payload.id, action.payload).pipe(
         map(idea => new fromIdea.UpdateIdeaSuccess(idea)),
-        catchError(err => of(new fromError.AddError(err)))
+        catchError(err => of(new fromError.AddError(err.error)))
       )
     )
   );
@@ -80,7 +80,31 @@ export class IdeaEffects {
     mergeMap(action =>
       this.api.deleteIdea(action.payload).pipe(
         map(idea => new fromIdea.DeleteIdeaSuccess(idea.id)),
-        catchError(err => of(new fromError.AddError(err)))
+        catchError(err => of(new fromError.AddError(err.error)))
+      )
+    )
+  );
+
+  @Effect()
+  upvoteIdeas$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.UpvoteIdea>(fromIdea.IdeaActions.UPVOTE_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(action =>
+      this.api.upvoteIdea(action.payload).pipe(
+        map(idea => new fromIdea.UpdateIdeaSuccess(idea)),
+        catchError(err => of(new fromError.AddError(err.error)))
+      )
+    )
+  );
+
+  @Effect()
+  downvoteIdeas$: Observable<Action> = this.action$.pipe(
+    ofType<fromIdea.DownvoteIdea>(fromIdea.IdeaActions.DOWNVOTE_IDEA),
+    tap(() => this.store.dispatch(new fromError.RemoveError())),
+    mergeMap(action =>
+      this.api.downvoteIdea(action.payload).pipe(
+        map(idea => new fromIdea.UpdateIdeaSuccess(idea)),
+        catchError(err => of(new fromError.AddError(err.error)))
       )
     )
   );
@@ -89,14 +113,6 @@ export class IdeaEffects {
   createIdeaRedirect$ = this.action$.pipe(
     ofType<fromIdea.CreateIdeaSuccess>(
       fromIdea.IdeaActions.CREATE_IDEA_SUCCESS
-    ),
-    tap(action => this.router.navigate(['/ideas', action.payload.id]))
-  );
-
-  @Effect({ dispatch: false })
-  updateIdeaRedirect$ = this.action$.pipe(
-    ofType<fromIdea.UpdateIdeaSuccess>(
-      fromIdea.IdeaActions.UPDATE_IDEA_SUCCESS
     ),
     tap(action => this.router.navigate(['/ideas', action.payload.id]))
   );

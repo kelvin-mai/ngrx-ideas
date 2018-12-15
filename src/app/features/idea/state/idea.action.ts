@@ -15,7 +15,10 @@ export enum IdeaActions {
   UPDATE_IDEA_SUCCESS = '[Idea] Update idea success',
 
   DELETE_IDEA = '[Idea] Delete idea',
-  DELETE_IDEA_SUCCESS = '[Idea] Delete idea success'
+  DELETE_IDEA_SUCCESS = '[Idea] Delete idea success',
+
+  UPVOTE_IDEA = '[Idea] Upvote idea',
+  DOWNVOTE_IDEA = '[Idea] Downvote idea'
 }
 
 export class LoadIdeas implements Action {
@@ -67,6 +70,16 @@ export class DeleteIdeaSuccess implements Action {
   constructor(public payload: string) {}
 }
 
+export class UpvoteIdea implements Action {
+  readonly type = IdeaActions.UPVOTE_IDEA;
+  constructor(public payload: string) {}
+}
+
+export class DownvoteIdea implements Action {
+  readonly type = IdeaActions.DOWNVOTE_IDEA;
+  constructor(public payload: string) {}
+}
+
 export type Action =
   | LoadIdeas
   | LoadIdeasSuccess
@@ -77,4 +90,6 @@ export type Action =
   | UpdateIdea
   | UpdateIdeaSuccess
   | DeleteIdea
-  | DeleteIdeaSuccess;
+  | DeleteIdeaSuccess
+  | UpvoteIdea
+  | DownvoteIdea;

@@ -29,6 +29,10 @@ export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
       return { ...state, loading: true, loaded: false };
     case IdeaActions.DELETE_IDEA:
       return { ...state, loading: true, loaded: false };
+    case IdeaActions.UPVOTE_IDEA:
+      return { ...state, loading: true, loaded: false };
+    case IdeaActions.DOWNVOTE_IDEA:
+      return { ...state, loading: true, loaded: false };
     case IdeaActions.LOAD_IDEAS_SUCCESS:
       return {
         ...state,
