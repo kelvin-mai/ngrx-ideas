@@ -1,4 +1,7 @@
 <div *ngIf="idea">
-  <app-idea [idea]="idea"></app-idea>
+  <app-idea
+    [idea]="idea"
+    [displayOptions]="idea.author.id === currentUser?.id"
+  ></app-idea>
   <p-card *ngFor="let comment of idea?.comments">{{ comment.comment }}</p-card>
 </div>

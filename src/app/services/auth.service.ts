@@ -15,7 +15,6 @@ export class AuthService implements CanActivate {
   constructor(private http: HttpClient) {}
 
   auth(authType: AuthType, data: AuthDTO): Observable<User> {
-    console.log('auth type', authType);
     return this.http.post<User>(`${this.api}/${authType}`, data).pipe(
       mergeMap((user: User) => {
         this.token = user.token;

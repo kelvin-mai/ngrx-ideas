@@ -1,7 +1,11 @@
 <h2>Edit Idea</h2>
 
-<div *ngIf="idea">
-  <app-idea [idea]="idea"></app-idea>
+<p-progressSpinner
+  *ngIf="(loading | async) || processSubmission"
+></p-progressSpinner>
+
+<div *ngIf="idea && !processSubmission">
+  <app-idea [idea]="idea" [displayOptions]="true"></app-idea>
 
   <app-idea-editable
     [idea]="idea"

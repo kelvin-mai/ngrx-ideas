@@ -1,1 +1,18 @@
-<app-idea *ngFor="let idea of ideas | async" [idea]="idea"></app-idea>
+<div class="Ideas-options" *ngIf="currentUser">
+  <button
+    pButton
+    [routerLink]="['/ideas', 'new']"
+    label="Create New Idea"
+    class="ui-button-info"
+  ></button>
+</div>
+
+<p-progressSpinner *ngIf="(loader | async)"></p-progressSpinner>
+
+<div *ngIf="!(loader | async)">
+  <app-idea
+    *ngFor="let idea of (ideas | async)"
+    [idea]="idea"
+    [displayOptions]="idea.author.id === currentUser?.id"
+  ></app-idea>
+</div>

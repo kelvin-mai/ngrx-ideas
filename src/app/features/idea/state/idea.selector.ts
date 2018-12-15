@@ -16,6 +16,11 @@ export const selectAllIdeas = createSelector(
   ideaEntityToArray
 );
 
+export const selectIdeaLoader = createSelector(
+  selectIdeaState,
+  (ideaState: IdeaState) => ideaState.loading
+);
+
 export const selectCurrentIdea = createSelector(
   selectIdeaState,
   (ideaState: IdeaState) => {

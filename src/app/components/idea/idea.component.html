@@ -1,14 +1,29 @@
 <p-card>
   <div class="Idea">
-    <div class="Idea-votes">
-      <a><i class="fa fa-angle-up"></i></a>
-      {{ idea?.upvotes?.length - idea?.upvotes?.length || 0 }}
-      <a><i class="fa fa-angle-down"></i></a>
+    <div class="Idea-header">
+      <div class="Idea-votes">
+        <a (click)="onUpvote.emit()"><i class="fa fa-angle-up"></i></a>
+        {{ idea?.upvotes?.length - idea?.upvotes?.length || 0 }}
+        <a (click)="onDownvote.emit()"><i class="fa fa-angle-down"></i></a>
+      </div>
+
+      <h2 [routerLink]="['/ideas', idea.id]">{{ idea.idea }}</h2>
     </div>
 
-    <h2 class="Idea-header" [routerLink]="['/ideas', idea.id]">
-      {{ idea.idea }}
-    </h2>
+    <div class="Idea-options" *ngIf="displayOptions">
+      <button
+        pButton
+        [routerLink]="['/ideas', idea.id, 'edit']"
+        icon="fa fa-plus"
+        class="ui-button-info"
+      ></button>
+      <button
+        pButton
+        (click)="onDelete.emit()"
+        icon="fa fa-times"
+        class="ui-button-danger"
+      ></button>
+    </div>
   </div>
   <p class="Idea-description">{{ idea.description }}</p>
 

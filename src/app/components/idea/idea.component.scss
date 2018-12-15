@@ -4,8 +4,14 @@ p-card {
 
 .Idea {
   display: flex;
+  justify-content: space-between;
+
   &-header {
-    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    h2 {
+      margin-left: 1rem;
+    }
   }
   &-votes {
     display: flex;
@@ -14,6 +20,11 @@ p-card {
     align-items: center;
     i {
       font-size: 1.5rem;
+    }
+  }
+  &-options {
+    button {
+      margin-left: 1rem;
     }
   }
   &-description {
