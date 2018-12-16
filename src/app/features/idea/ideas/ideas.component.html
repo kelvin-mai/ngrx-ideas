@@ -1,10 +1,15 @@
-<div class="Ideas-options" *ngIf="currentUser">
+<div class="Ideas-options">
+  <button pButton icon="fa fa-arrow-left"></button>
+
   <button
+    *ngIf="currentUser"
     pButton
     [routerLink]="['/ideas', 'new']"
     label="Create New Idea"
     class="ui-button-info"
   ></button>
+
+  <button pButton icon="fa fa-arrow-right"></button>
 </div>
 
 <p-progressSpinner *ngIf="(loader | async)"></p-progressSpinner>

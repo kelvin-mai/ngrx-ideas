@@ -1,0 +1,23 @@
+.Comment {
+  &-form {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 1rem;
+    textarea {
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+    &-buttons {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &-button {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+  }
+}

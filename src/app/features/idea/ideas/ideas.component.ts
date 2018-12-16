@@ -8,9 +8,10 @@ import {
   AppState,
   LoadIdeas,
   UpvoteIdea,
-  DownvoteIdea
-} from '@app/features/idea/state';
-import { selectAllIdeas, selectIdeaLoader } from '../state/idea.selector';
+  DownvoteIdea,
+  selectAllIdeas,
+  selectIdeaLoader
+} from '../state';
 
 @Component({
   selector: 'app-ideas',

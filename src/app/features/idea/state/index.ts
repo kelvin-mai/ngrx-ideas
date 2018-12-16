@@ -17,4 +17,4 @@ export interface AppState extends Store.AppState {
 export * from './idea.action';
 export * from './idea.effects';
 export * from './idea.reducer';
-// export * from './idea.selector';
+export * from './idea.selector';

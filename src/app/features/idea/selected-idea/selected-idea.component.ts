@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { Idea } from '@app/models/idea';
 import { User } from '@app/models/user';
-import { AppState } from '../state';
-import { selectCurrentIdea } from '../state/idea.selector';
+import { AppState, selectCurrentIdea } from '../state';
 
 @Component({
   selector: 'app-selected-idea',
@@ -17,6 +16,9 @@ export class SelectedIdeaComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[];
   idea: Idea;
   currentUser: User;
+  showForm: boolean = false;
+  comment = '';
+
   constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
@@ -33,5 +35,9 @@ export class SelectedIdeaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription$.forEach(s => s.unsubscribe());
+  }
+
+  submit() {
+    console.log('submitted', this.comment);
   }
 }

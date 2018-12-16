@@ -1,6 +1,7 @@
 .Ideas {
   &-options {
     margin-top: 1rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
   }
 }

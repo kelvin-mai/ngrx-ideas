@@ -6,8 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 
 import { Idea, IdeaDTO } from '@app/models/idea';
 import { AppState } from '@app/features/user/state';
-import { selectCurrentIdea, selectIdeaLoader } from '../state/idea.selector';
-import { UpdateIdea } from '../state';
+import { UpdateIdea, selectCurrentIdea, selectIdeaLoader } from '../state';
 
 @Component({
   selector: 'app-edit-idea',

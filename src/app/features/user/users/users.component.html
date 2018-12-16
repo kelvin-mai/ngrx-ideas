@@ -1,7 +1,13 @@
-<p-card *ngFor="let user of users | async">
+<div class="User-options">
+  <button pButton icon="fa fa-arrow-left"></button>
+
+  <button pButton icon="fa fa-arrow-right"></button>
+</div>
+
+<p-card *ngFor="let user of (users | async)">
   <div class="UserCard-info">
     <h2>{{ user.username }}</h2>
-    <p>Registered: {{ user.created | date}}</p>
+    <p>Registered: {{ user.created | date }}</p>
   </div>
 
   <div class="UserCard-links">
