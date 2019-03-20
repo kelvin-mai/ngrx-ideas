@@ -9,10 +9,7 @@ const initialState: IdeaState = {
   selectedIdea: null
 };
 
-export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
-  state = initialState,
-  action
-) => {
+export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (state = initialState, action) => {
   switch (action.type) {
     case IdeaActions.LOAD_IDEAS:
       return { ...state, loading: true, loaded: false };
@@ -36,19 +33,14 @@ export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
     case IdeaActions.LOAD_IDEAS_SUCCESS:
       return {
         ...state,
-        ideas: action.payload.reduce(
-          (acc, idea) => ({ ...acc, [idea.id]: idea }),
-          state.ideas
-        ),
+        ideas: action.payload.reduce((acc, idea) => ({ ...acc, [idea.id]: idea }), state.ideas),
         loading: false,
         loaded: true
       };
     case IdeaActions.LOAD_IDEA_SUCCESS:
       return {
         ...state,
-        ideas: action.payload
-          ? { ...state.ideas, [action.payload.id]: action.payload }
-          : state.ideas,
+        ideas: action.payload ? { ...state.ideas, [action.payload.id]: action.payload } : state.ideas,
         loading: false,
         loaded: true
       };
@@ -69,11 +61,15 @@ export const ideaReducer: (state: IdeaState, action: Action) => IdeaState = (
         loaded: true
       };
     case IdeaActions.DELETE_IDEA_SUCCESS:
+      const reducedIdeaArray = Object.keys(state.ideas)
+        .filter(key => key !== action.payload)
+        .reduce((result, current) => {
+          result[current] = state.ideas[current];
+          return result;
+        }, {});
       return {
         ...state,
-        ideas: Object.keys(state.ideas)
-          .filter(key => key !== action.payload)
-          .reduce((acc, key) => ({ ...acc, key: state[key] }), {}),
+        ideas: reducedIdeaArray,
         loading: false,
         loaded: true
       };
